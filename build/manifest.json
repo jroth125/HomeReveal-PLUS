@@ -3,10 +3,19 @@
   "description": "An extension to reveal where you want to live",
   "version": "1.0",
   "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
   "browser_action": {
     "default_title": "Chrome Extension Boilerplate",
     "default_popup": "index.html"
   },
+  "permissions": [
+    "tabs"
+  ],
   "content_scripts": [
     {
       "matches": [
