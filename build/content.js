@@ -32,7 +32,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       address.pop()
       address = address.join(' ').toUpperCase()
       const response = await fetch(
-        `https://data.cityofnewyork.us/resource/erm2-nwe9.json?incident_address=${address}&$where=created_date%20between%20%272015-01-10T12:00:00%27%20and%20%272019-01-10T14:00:00%27&borough=${currBorough}&location_type=RESIDENTIAL BUILDING`
+        `https://data.cityofnewyork.us/resource/erm2-nwe9.json?incident_address=${address}&$where=created_date%20between%20%272015-01-10T12:00:00%27%20and%20%272019-11-10T14:00:00%27&borough=${currBorough}&location_type=RESIDENTIAL BUILDING`
       )
       const myJson = await response.json()
       let dataLength = myJson.length
@@ -55,17 +55,18 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 
 const showComplaints = async (e) => {
-    if (!e.target.clicked) {
-        e.preventDefault()
+    if (!+e.target.clicked) {
+        console.log('HERE ONE')
         let button = e.target
-        e.target.clicked = 'true'
+        e.target.clicked = 1
         let currBorough = button.name
         let address = button.id
     
         let table = button.parentElement.parentElement.getElementsByClassName('row')[0]
     
-        const data = await fetch(`https://data.cityofnewyork.us/resource/erm2-nwe9.json?incident_address=${address}&$where=created_date%20between%20%272015-01-10T12:00:00%27%20and%20%272019-01-10T14:00:00%27&borough=${currBorough}&location_type=RESIDENTIAL BUILDING`)
-        const jsonData = await data.json()
+        const data = await fetch(`https://data.cityofnewyork.us/resource/erm2-nwe9.json?incident_address=${address}&$where=created_date%20between%20%272015-01-10T12:00:00%27%20and%20%272019-11-10T14:00:00%27&borough=${currBorough}&location_type=RESIDENTIAL BUILDING`)
+        const json = await data.json()
+        const jsonData = json.reverse()
         let dataTable = document.createElement('table')
         dataTable.innerHTML = `
         <thead> 
@@ -78,20 +79,22 @@ const showComplaints = async (e) => {
                 `<tr>
                     <td> ${createdDateHuman}</td>       
                     <td> ${incident.complaint_type} </td>
-                </tr>`)
-        })}
+                </tr>`)}).join('')}
         </tbody>`
         dataTable.className = 'dataTable'
 
         table.appendChild(dataTable)
     
-    } else {
-        e.target.clicked = ''
+    } else if (+e.target.clicked){
+        console.log('HERE TWO')
+        e.target.clicked = 0
         console.log('target el is: ', e.target)
         let article = e.target.parentElement.parentElement
         console.log('article is:', article)
         let dataTable = article.querySelector('.dataTable')
-        dataTable.innerHTML = ''
+        dataTable.remove()
         
+    } else {
+        console.log('HERE THREE')
     }
 }

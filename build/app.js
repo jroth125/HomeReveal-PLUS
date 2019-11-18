@@ -133,7 +133,7 @@ function (_React$Component) {
   _createClass(App, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "WHATS UPPPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Main__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Main__WEBPACK_IMPORTED_MODULE_1__["default"], null));
     }
   }]);
 
@@ -214,8 +214,15 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "What borough do you live in?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        onChange: this.clickHandler
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "d-flex flex-column"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "flex-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "text-center align-center"
+      }, "What Borough are you searching in?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        onChange: this.clickHandler,
+        className: "text-center btn btn-primary align-middle"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "MANHATTAN"
       }, "Manhattan"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
@@ -226,7 +233,29 @@ function (_React$Component) {
         value: "BRONX"
       }, "Bronx"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "STATEN ISLAND"
-      }, "Staten Island")));
+      }, "Staten Island"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "flex-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "text-center"
+      }, "What are you interested in seeing? "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        "class": "form-check align-middle"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        "class": "form-check-input",
+        type: "checkbox",
+        value: "three11",
+        id: "three11Check"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        "class": "form-check-label",
+        "for": "three11Check"
+      }, "311 complaints"), ' ', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        "class": "form-check-input",
+        type: "checkbox",
+        value: "Grocery",
+        id: "defaultCheck1"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        "class": "form-check-label",
+        "for": "groceryCheck"
+      }, "Local Grocery Stores"))));
     }
   }]);
 
@@ -246,7 +275,7 @@ function (_React$Component) {
 
 exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "html,\nbody {\n  height: 500px;\n  width: 800px;\n  margin: 0;\n  padding: 0;\n  overflow-x: hidden;\n}", ""]);
+exports.push([module.i, "html,\nbody {\n  height: 400px;\n  width: 300px;\n  margin: 0;\n  padding: 0;\n  overflow-x: hidden;\n  background-color: #adc4ed;\n}", ""]);
 
 
 /***/ }),
