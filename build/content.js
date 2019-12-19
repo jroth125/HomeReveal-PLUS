@@ -176,15 +176,16 @@ if (pathNames[1] === 'for-rent') {
       if (complaintData[0]) {
         dataTable.innerHTML = `
           <thead> 
-              <tr> <td><b style="margin-right: 7px;">Date of Complaint</b></td>  <td><b>Complaint Type</b></td></tr>
+              <tr> <td><b style="margin-right: 7px;">Date of Complaint</b></td>  <td><b>Complaint Type</b></td> <td><b>Description</b></td></tr>
           </thead> 
           <tbody>${complaintData
             .map(incident => {
               let createdDateArr = incident.created_date.split('-');
               let createdDateHuman = `${createdDateArr[1]}/${createdDateArr[0]}`;
               return `<tr>
-                      <td style="margin-right: 7px;"> ${createdDateHuman}</td>       
+                      <td style="width: 130px;"> ${createdDateHuman}</td>       
                       <td> ${incident.complaint_type} </td>
+                      <td>${incident.descriptor[0] + incident.descriptor.slice(1).toLowerCase()}</td>
                   </tr>`;
             })
             .join('')}
@@ -197,7 +198,7 @@ if (pathNames[1] === 'for-rent') {
       }
       dataTable.className = 'dataTable';
       const tableContainer = document.createElement('div')
-      tableContainer.style = 'background-color: #FFFBB6; margin-top: 0px; display: flex; justify-content: center; align-content: center;';
+      tableContainer.style = 'width: 500px; background-color: #FFFBB6; margin-top: 0px; display: flex; justify-content: center; align-content: center;';
       tableContainer.appendChild(dataTable)
       table.appendChild(tableContainer);
     } else if (+e.target.clicked) {
