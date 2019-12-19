@@ -196,8 +196,10 @@ if (pathNames[1] === 'for-rent') {
           </thead>`;
       }
       dataTable.className = 'dataTable';
-      dataTable.style = 'background-color: #FFFBB6;'
-      table.appendChild(dataTable);
+      const tableContainer = document.createElement('div')
+      tableContainer.style = 'background-color: #FFFBB6; margin-top: 0px; display: flex; justify-content: center; align-content: center;';
+      tableContainer.appendChild(dataTable)
+      table.appendChild(tableContainer);
     } else if (+e.target.clicked) {
       e.target.innerText = 'Click here to see more'
       e.target.clicked = 0;
@@ -218,7 +220,7 @@ if (pathNames[1] === 'for-rent') {
       const complaints = document.createElement('div');
       complaints.className = 'details_info';
       complaints.innerHTML = `<span class="nobreak" style="color: red;">This apartment has <b>${complaintData.length}</b> complaints</span> <button id="dataButton" clicked="0" style="width: 150px; height: 30px; font-size: 12px; margin: 8px 6px;">Click here to see more</button>`;
-      complaints.style = 'background-color: #FFFBB6;'
+      complaints.style = 'background-color: #FFFBB6; margin-bottom: 0px'
 
       const holdingDiv = document.getElementsByClassName('details')[0];
       holdingDiv.appendChild(complaints);
