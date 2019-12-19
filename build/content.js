@@ -169,8 +169,6 @@ if (pathNames[1] === 'for-rent') {
       e.target.innerText = 'Hide'
       let button = e.target;
       e.target.clicked = 1;
-      let currBorough = button.name;
-      let address = button.id;
 
       let table = button.parentElement.parentElement;
 
@@ -198,6 +196,7 @@ if (pathNames[1] === 'for-rent') {
           </thead>`;
       }
       dataTable.className = 'dataTable';
+      dataTable.style = 'background-color: #FFFBB6;'
       table.appendChild(dataTable);
     } else if (+e.target.clicked) {
       e.target.innerText = 'Click here to see more'
@@ -218,7 +217,8 @@ if (pathNames[1] === 'for-rent') {
 
       const complaints = document.createElement('div');
       complaints.className = 'details_info';
-      complaints.innerHTML = `<span class="nobreak" style="color: red;">This apartment has <b>${complaintData.length}</b> complaints</span> <button id="dataButton" clicked="0" style="width: 150px; height: 30px; font-size: 12px; margin-left: 10px; margin-top: 15px">Click here to see more</button>`;
+      complaints.innerHTML = `<span class="nobreak" style="color: red;">This apartment has <b>${complaintData.length}</b> complaints</span> <button id="dataButton" clicked="0" style="width: 150px; height: 30px; font-size: 12px; margin: 8px 6px;">Click here to see more</button>`;
+      complaints.style = 'background-color: #FFFBB6;'
 
       const holdingDiv = document.getElementsByClassName('details')[0];
       holdingDiv.appendChild(complaints);
