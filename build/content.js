@@ -176,7 +176,7 @@ if (pathNames[1] === 'for-rent') {
       if (complaintData[0]) {
         dataTable.innerHTML = `
           <thead> 
-              <tr> <td><b style="margin-right: 7px;">Date of Complaint</b></td>  <td><b>Complaint Type</b></td> <td><b>Description</b></td></tr>
+              <tr> <td><b style="margin-right: 7px;">Date of Complaint</b></td>  <td><b>Complaint Type</b></td> <td style="padding-left: 15px;"><b>Description</b></td></tr>
           </thead> 
           <tbody>${complaintData
             .map(incident => {
@@ -184,12 +184,13 @@ if (pathNames[1] === 'for-rent') {
               let createdDateHuman = `${createdDateArr[1]}/${createdDateArr[0]}`;
               return `<tr>
                       <td style="width: 130px;"> ${createdDateHuman}</td>       
-                      <td> ${incident.complaint_type} </td>
-                      <td>${incident.descriptor[0] + incident.descriptor.slice(1).toLowerCase()}</td>
+                      <td style="width: 150px;"> ${incident.complaint_type} </td>
+                      <td style="padding-left: 15px;">${incident.descriptor[0] + incident.descriptor.slice(1).toLowerCase()}</td>
                   </tr>`;
             })
             .join('')}
           </tbody>`;
+          e.target.parentElement.style = 'background-color: #FFFBB6; margin-bottom: 0px; width: 500px'
       } else {
         dataTable.innerHTML = `
           <thead> 
@@ -204,6 +205,7 @@ if (pathNames[1] === 'for-rent') {
     } else if (+e.target.clicked) {
       e.target.innerText = 'Click here to see more'
       e.target.clicked = 0;
+      e.target.parentElement.style = 'background-color: #FFFBB6; margin-bottom: 0px'
       let article = e.target.parentElement.parentElement;
       let dataTable = article.querySelector('.dataTable');
       dataTable.remove();
@@ -220,13 +222,13 @@ if (pathNames[1] === 'for-rent') {
 
       const complaints = document.createElement('div');
       complaints.className = 'details_info';
-      complaints.innerHTML = `<span class="nobreak" style="color: red;">This apartment has <b>${complaintData.length}</b> complaints</span> <button id="dataButton" clicked="0" style="width: 150px; height: 30px; font-size: 12px; margin: 8px 6px;">Click here to see more</button>`;
+      complaints.innerHTML = `<span class="nobreak" style="color: red; margin-left: 5px"><b>${complaintData.length}</b> housing complaints (last 5 years)</span> <button id="dataButton" clicked="0" style="width: 150px; height: 30px; font-size: 12px; margin: 8px 6px 0px;">Click here to see more</button>`;
       complaints.style = 'background-color: #FFFBB6; margin-bottom: 0px'
 
       const holdingDiv = document.getElementsByClassName('details')[0];
       holdingDiv.appendChild(complaints);
       complaints.querySelector('#dataButton').onclick = e =>
-        clickHandler(e, complaintData);
+        clickHandler(e, complaintData.reverse());
     });
   });
 }
