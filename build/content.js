@@ -149,7 +149,10 @@ if (pathNames[1] === 'for-rent') {
       console.log('HERE THREE');
     }
   };
-} else if (pathNames[1] === 'building' && pathNames[3]) {
+} else if (
+  (pathNames[1] === 'building' && pathNames[3]) ||
+  (pathNames[1] === 'rental' && pathNames[2])
+) {
   let addressEnd = document
     .getElementsByClassName('backend_data')[0]
     .getElementsByTagName('span')[0]
@@ -166,7 +169,7 @@ if (pathNames[1] === 'for-rent') {
 
   function clickHandler(e, complaintData) {
     if (!+e.target.clicked) {
-      e.target.innerText = 'Hide'
+      e.target.innerText = 'Hide';
       let button = e.target;
       e.target.clicked = 1;
 
@@ -176,38 +179,45 @@ if (pathNames[1] === 'for-rent') {
       if (complaintData[0]) {
         dataTable.innerHTML = `
           <thead> 
-              <tr> <td><b style="margin-right: 7px;">Date of Complaint</b></td>  <td><b>Complaint Type</b></td> <td style="padding-left: 15px;"><b>Description</b></td></tr>
+              <tr> <td><b style="margin-right: position: sticky; 7px;">Date of Complaint</b></td>  <td><b>Complaint Type</b></td> <td style="padding-left: 15px;"><b>Description</b></td></tr>
           </thead> 
-          <tbody>${complaintData
+          <tbody style="max-height: 274px;">${complaintData
             .map(incident => {
               let createdDateArr = incident.created_date.split('-');
               let createdDateHuman = `${createdDateArr[1]}/${createdDateArr[0]}`;
               return `<tr>
                       <td style="width: 130px;"> ${createdDateHuman}</td>       
-                      <td style="width: 150px;"> ${incident.complaint_type} </td>
-                      <td style="padding-left: 15px;">${incident.descriptor[0] + incident.descriptor.slice(1).toLowerCase()}</td>
+                      <td style="width: 150px;"> ${
+                        incident.complaint_type
+                      } </td>
+                      <td style="padding-left: 15px;">${incident.descriptor[0] +
+                        incident.descriptor.slice(1).toLowerCase()}</td>
                   </tr>`;
             })
             .join('')}
           </tbody>`;
-          e.target.parentElement.style = 'background-color: #FFFBB6; margin-bottom: 0px; width: 500px'
+        e.target.parentElement.style =
+          'background-color: #FFFBB6; margin-bottom: 0px; width: 500px; border: 1px black dashed; border-bottom: 0px;';
       } else {
         dataTable.innerHTML = `
           <thead> 
-              <tr> <b style='text-align: center;'> No complaints to show </b></tr>
+              <tr> <b style='text-align: left'> No complaints to show </b></tr>
           </thead>`;
       }
       dataTable.className = 'dataTable';
-      const tableContainer = document.createElement('div')
-      tableContainer.style = 'width: 500px; background-color: #FFFBB6; margin-top: 0px; display: flex; justify-content: center; align-content: center;';
-      tableContainer.appendChild(dataTable)
+      const tableContainer = document.createElement('div');
+      tableContainer.style =
+        'width: 500px; overflow: scroll; max-height: 276px; border-width: 1px; border-top: 0px; border-color: black; border-style: dashed; background-color: #FFFBB6; margin-top: 0px; display: flex; justify-content: center; align-content: center;';
+      tableContainer.id = 'tableContainer'
+      tableContainer.appendChild(dataTable);
       table.appendChild(tableContainer);
     } else if (+e.target.clicked) {
-      e.target.innerText = 'Click here to see more'
+      e.target.innerText = 'See all';
       e.target.clicked = 0;
-      e.target.parentElement.style = 'background-color: #FFFBB6; margin-bottom: 0px'
+      e.target.parentElement.style =
+        'background-color: #FFFBB6; margin-bottom: 0px';
       let article = e.target.parentElement.parentElement;
-      let dataTable = article.querySelector('.dataTable');
+      let dataTable = article.querySelector('#tableContainer');
       dataTable.remove();
     }
   }
@@ -222,8 +232,9 @@ if (pathNames[1] === 'for-rent') {
 
       const complaints = document.createElement('div');
       complaints.className = 'details_info';
-      complaints.innerHTML = `<span class="nobreak" style="color: red; margin-left: 5px"><b>${complaintData.length}</b> housing complaints (last 5 years)</span> <button id="dataButton" clicked="0" style="width: 150px; height: 30px; font-size: 12px; margin: 8px 6px 0px;">Click here to see more</button>`;
-      complaints.style = 'background-color: #FFFBB6; margin-bottom: 0px'
+      complaints.innerHTML = `<span class="nobreak" style="color: red; font-size: 16px; margin-left: 5px"><b>${complaintData.length} building complaints</b> (last 5 years)</span> 
+      <button id="dataButton" clicked="0" style="width: 90px; height: 30px; font-size: 14px; margin: 8px 0px 4px 8px;">See more</button>`;
+      complaints.style = 'background-color: #FFFBB6; margin-bottom: 0px';
 
       const holdingDiv = document.getElementsByClassName('details')[0];
       holdingDiv.appendChild(complaints);
