@@ -88,9 +88,7 @@ if (pathNames[1] === 'for-rent') {
           linkToPopUp.name = currBorough;
           const complaintInfo = document.createElement('li')
           complaintInfo.className = 'details_info'
-          complaintInfo.innerHTML = `${dataLength} complaints against building <button style="margin-left: 15px; padding: 3px 0px; margin-top: 4px;"><a style="padding: 5px 20px">See more</a></button>`
-          complaintInfo.children[0].name = currBorough
-          complaintInfo.children[0].id = address
+          complaintInfo.innerHTML = `${dataLength} complaints against building <button style="margin-left: 15px; padding: 3px 0px; margin-top: 4px;"><a name="${currBorough}" id="${address}" style="padding: 5px 20px">See more</a></button>`
           complaintInfo.children[0].addEventListener('click', showComplaints)
           // let jsonData = document.createElement('button');
           // jsonData.style =
@@ -107,7 +105,7 @@ if (pathNames[1] === 'for-rent') {
 
   const showComplaints = async e => {
     if (!+e.target.clicked) {
-      let button = e.target.parentElement;
+      let button = e.target;
       console.log('target is', e.target)
       e.target.clicked = 1;
       let currBorough = button.name;
