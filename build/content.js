@@ -86,14 +86,20 @@ if (pathNames[1] === 'for-rent') {
           linkToPopUp.style = 'padding-top: 40px;';
           linkToPopUp.id = address;
           linkToPopUp.name = currBorough;
-          let jsonData = document.createElement('button');
-          jsonData.style =
-            'font-size: 20px; padding: 2% 4%; text-align: center; margin-left: 4px';
+          const complaintInfo = document.createElement('li')
+          complaintInfo.className = 'details_info'
+          complaintInfo.innerHTML = `${dataLength} complaints against building <button style="margin-left: 15px; padding: 3px 0px; margin-top: 4px;"><a style="padding: 5px 20px">See more</a></button>`
+          complaintInfo.children[0].name = currBorough
+          complaintInfo.children[0].id = address
+          complaintInfo.children[0].addEventListener('click', showComplaints)
+          // let jsonData = document.createElement('button');
+          // jsonData.style =
+          //   'font-size: 20px; padding: 2% 4%; text-align: center; margin-left: 4px';
 
-          jsonData.addEventListener('click', showComplaints);
+          // jsonData.addEventListener('click', showComplaints);
 
-          jsonData.appendChild(linkToPopUp);
-          item.appendChild(jsonData);
+          // jsonData.appendChild(linkToPopUp);
+          item.getElementsByTagName('ul')[0].appendChild(complaintInfo);
         }
       });
     }
@@ -101,19 +107,18 @@ if (pathNames[1] === 'for-rent') {
 
   const showComplaints = async e => {
     if (!+e.target.clicked) {
-      let button = e.target;
+      let button = e.target.parentElement;
+      console.log('target is', e.target)
       e.target.clicked = 1;
       let currBorough = button.name;
       let address = button.id;
 
-      let table = button.parentElement.parentElement.getElementsByClassName(
-        'row'
-      )[0];
-
+      let table = button.parentElement.parentElement
       const data = await fetch(
         `https://data.cityofnewyork.us/resource/erm2-nwe9.json?incident_address=${address}&$where=created_date%20between%20%272015-01-10T12:00:00%27%20and%20%272019-11-10T14:00:00%27&borough=${currBorough}&location_type=RESIDENTIAL BUILDING`
       );
       const json = await data.json();
+      console.log('data is',json)
       const jsonData = json.reverse();
       let dataTable = document.createElement('table');
       if (json[0]) {
